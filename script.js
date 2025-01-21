@@ -1,60 +1,65 @@
-const addZone = document.getElementById("add-zone");
-const subtractZone = document.getElementById("subtract-zone");
-const equationDisplay = document.getElementById("equation");
+const leftLegoContainer = document.getElementById("left-lego");
+const rightLegoContainer = document.getElementById("right-lego");
+const operatorDisplay = document.getElementById("operator");
+const answerInput = document.getElementById("answer");
+const submitButton = document.getElementById("submit");
+const feedback = document.getElementById("feedback");
 
-let total = 0;
+let num1, num2, correctAnswer, operation;
 
-// Handle Drag & Drop for Desktop Users
-document.querySelectorAll(".lego").forEach(lego => {
-    lego.addEventListener("dragstart", (event) => {
-        event.dataTransfer.setData("text", event.target.getAttribute("data-value"));
-    });
+// Function to generate a random equation
+function generateEquation() {
+    // Clear previous LEGO bricks
+    leftLegoContainer.innerHTML = "";
+    rightLegoContainer.innerHTML = "";
 
-    // 🏆 NEW: Handle Tap for Touch Devices
-    lego.addEventListener("click", () => {
-        let value = parseInt(lego.getAttribute("data-value"));
-        total += value;
-        updateEquation();
-    });
+    // Randomly choose addition or subtraction
+    operation = Math.random() > 0.5 ? "+" : "-";
+    num1 = Math.floor(Math.random() * 5) + 1; // 1 to 5
+    num2 = Math.floor(Math.random() * 5) + 1; // 1 to 5
+
+    // Ensure subtraction always results in a positive number
+    if (operation === "-" && num1 < num2) {
+        [num1, num2] = [num2, num1]; // Swap to prevent negative answers
+    }
+
+    correctAnswer = operation === "+" ? num1 + num2 : num1 - num2;
+    operatorDisplay.textContent = operation;
+
+    // Create LEGO bricks for visual representation
+    createLegoBricks(leftLegoContainer, num1);
+    createLegoBricks(rightLegoContainer, num2);
+
+    // Clear previous input
+    answerInput.value = "";
+    feedback.textContent = "";
+}
+
+// Function to create LEGO bricks
+function createLegoBricks(container, count) {
+    for (let i = 0; i < count; i++) {
+        let brick = document.createElement("div");
+        brick.classList.add("lego");
+        brick.style.backgroundColor = getRandomColor();
+        container.appendChild(brick);
+    }
+}
+
+// Function to get a random color for LEGO bricks
+function getRandomColor() {
+    const colors = ["red", "blue", "green", "orange", "purple"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Function to check the answer
+submitButton.addEventListener("click", () => {
+    if (parseInt(answerInput.value) === correctAnswer) {
+        feedback.textContent = "✅ Correct! Great Job!";
+        setTimeout(generateEquation, 2000); // Generate a new equation after 2 seconds
+    } else {
+        feedback.textContent = "❌ Try again!";
+    }
 });
 
-// 🏆 NEW: Touch Support for Drop Zones
-function handleTouchDrop(event, isAdding) {
-    let value = parseInt(event.target.getAttribute("data-value"));
-    if (isAdding) {
-        total += value;
-    } else {
-        total -= value;
-    }
-    updateEquation();
-}
-
-// Drop Zones Handling
-function handleDrop(event, isAdding) {
-    event.preventDefault();
-    const value = parseInt(event.dataTransfer.getData("text"));
-
-    if (isAdding) {
-        total += value;
-    } else {
-        total -= value;
-    }
-
-    updateEquation();
-}
-
-// 🏆 NEW: Update Equation Display
-function updateEquation() {
-    equationDisplay.innerText = `Total: ${total}`;
-}
-
-// Allow Drop on Desktop
-addZone.addEventListener("dragover", (event) => event.preventDefault());
-addZone.addEventListener("drop", (event) => handleDrop(event, true));
-
-subtractZone.addEventListener("dragover", (event) => event.preventDefault());
-subtractZone.addEventListener("drop", (event) => handleDrop(event, false));
-
-// 🏆 NEW: Touch Drop Support
-addZone.addEventListener("click", () => handleTouchDrop(event, true));
-subtractZone.addEventListener("click", () => handleTouchDrop(event, false));
+// Generate the first equation
+generateEquation();

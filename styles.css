@@ -3,88 +3,58 @@ body {
     text-align: center;
     background-color: #f0f8ff;
     margin: 0;
-    padding: 10px;
+    padding: 20px;
 }
 
 h1 {
     color: #ff5733;
-    font-size: 24px;
 }
 
 p {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
-.lego-container {
+#equation-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    align-items: center;
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
-.lego {
-    width: 70px;
-    height: 50px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    line-height: 50px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    user-select: none;
-    transition: transform 0.2s ease-in-out;
-}
-
-.lego:nth-child(1) { background-color: red; }
-.lego:nth-child(2) { background-color: blue; }
-.lego:nth-child(3) { background-color: green; }
-.lego:nth-child(4) { background-color: orange; }
-
-.lego:active {
-    transform: scale(1.2);
-}
-
-.drop-area {
-    width: 90%;
-    max-width: 300px;
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-#add-zone {
-    border: 2px dashed #28a745;
-    background-color: #d4edda;
-}
-
-#subtract-zone {
-    border: 2px dashed #dc3545;
-    background-color: #f8d7da;
-}
-
-.drop-zone {
-    width: 90%;
-    max-width: 250px;
-    height: 100px;
-    margin: 10px auto;
+#left-lego, #right-lego {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
+    gap: 5px;
+    margin: 0 10px;
 }
 
-#equation {
+.lego {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+input {
+    width: 60px;
     font-size: 22px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+button {
+    font-size: 22px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#feedback {
+    font-size: 20px;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 20px;
 }

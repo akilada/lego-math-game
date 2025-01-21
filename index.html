@@ -9,27 +9,18 @@
 <body>
 
     <h1>LEGO Math Game</h1>
-    <p>Drag or tap LEGO bricks to add or subtract numbers!</p>
+    <p>Count the LEGO bricks and enter the correct answer!</p>
 
     <div id="game-container">
-        <div class="lego-container">
-            <div class="lego" data-value="1">1</div>
-            <div class="lego" data-value="2">2</div>
-            <div class="lego" data-value="3">3</div>
-            <div class="lego" data-value="5">5</div>
+        <div id="equation-container">
+            <div id="left-lego"></div>
+            <span id="operator">+</span>
+            <div id="right-lego"></div>
+            <span>=</span>
+            <input type="number" id="answer" placeholder="?" />
+            <button id="submit">✔️</button>
         </div>
-
-        <div class="drop-area">
-            <h2>➕ Add Here</h2>
-            <div id="add-zone" class="drop-zone"></div>
-        </div>
-
-        <div class="drop-area">
-            <h2>➖ Subtract Here</h2>
-            <div id="subtract-zone" class="drop-zone"></div>
-        </div>
-
-        <div id="equation">Total: 0</div>
+        <p id="feedback"></p>
     </div>
 
     <script src="script.js"></script>
