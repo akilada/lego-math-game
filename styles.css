@@ -35,26 +35,43 @@ p {
 }
 
 .lego {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 5px;
+    display: inline-block;
+    margin: 5px;
+    transition: opacity 0.5s ease-out;
 }
 
-input {
-    width: 60px;
-    font-size: 22px;
+.lego.removed {
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* Number Line Styling */
+#number-line {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.number {
+    width: 30px;
+    height: 30px;
     text-align: center;
-    margin: 0 10px;
-}
-
-button {
-    font-size: 22px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-#feedback {
+    line-height: 30px;
     font-size: 20px;
     font-weight: bold;
-    margin-top: 20px;
+    border: 1px solid #000;
+    background-color: lightgray;
+}
+
+#character {
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
 }
